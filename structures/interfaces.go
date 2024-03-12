@@ -19,3 +19,13 @@ type Stacker[T comparable] interface {
 	Top() (T, error)
 	Bottom() (T, error)
 }
+
+// Queuer define the basic operations of a queue
+type Queuer[T comparable] interface {
+	Sizer[T]
+	Finder[T]
+	Pop() (T, error)
+	Push(value T)
+	Top() (T, error)
+	Bottom() (T, error)
+}
