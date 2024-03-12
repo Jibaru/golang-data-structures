@@ -10,6 +10,10 @@ A spanish playlist explaining all structures on this repository.
 
 ## Data structures
 
-- Stack
+### Stack
 
 ![01_Stack](diagrams/img/01_stack.png)
+
+### Queue
+
+![02_Queue](diagrams/img/02_queue.png)
