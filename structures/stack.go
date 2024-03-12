@@ -28,7 +28,7 @@ func (s *stack[T]) Pop() (T, error) {
 
 	topValue := s.top.value
 	s.top = s.top.next
-	s.size++
+	s.size--
 
 	return topValue, nil
 }
