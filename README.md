@@ -17,3 +17,7 @@ A spanish playlist explaining all structures on this repository.
 ### Queue
 
 ![02_Queue](diagrams/img/02_queue.png)
+
+### Simple Linked List
+
+![03_Simple_Linked_List](diagrams/img/03_simple_linked_list.png)
