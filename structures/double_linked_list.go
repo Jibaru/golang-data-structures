@@ -35,12 +35,14 @@ func (s *doubleLinkedList[T]) PushAt(index int, value T) error {
 		return ErrIndexOutOfRangeInDoubleLinkedList
 	}
 
-	if index == 0 {
-		s.first = &doubleNode[T]{
-			value: value,
-			prev:  nil,
-			next:  s.first,
+	newNode := &doubleNode[T]{value: value}
+
+	if s.first == nil || index == 0 {
+		newNode.next = s.first
+		if s.first != nil {
+			s.first.prev = newNode
 		}
+		s.first = newNode
 		s.size++
 		return nil
 	}
@@ -50,13 +52,13 @@ func (s *doubleLinkedList[T]) PushAt(index int, value T) error {
 		current = current.next
 	}
 
-	current.next = &doubleNode[T]{
-		value: value,
-		prev:  current,
-		next:  current.next,
+	newNode.next = current.next
+	newNode.prev = current
+	if current.next != nil {
+		current.next.prev = newNode
 	}
+	current.next = newNode
 	s.size++
-
 	return nil
 }
 
@@ -71,10 +73,14 @@ func (s *doubleLinkedList[T]) PopAt(index int) (T, error) {
 		return t, ErrIndexOutOfRangeInDoubleLinkedList
 	}
 
+	var value T
+
 	if index == 0 {
-		value := s.first.value
+		value = s.first.value
 		s.first = s.first.next
-		s.first.prev = nil
+		if s.first != nil {
+			s.first.prev = nil
+		}
 		s.size--
 		return value, nil
 	}
@@ -84,11 +90,13 @@ func (s *doubleLinkedList[T]) PopAt(index int) (T, error) {
 		current = current.next
 	}
 
-	value := current.next.value
-	current.next = current.next.next
-	current.next.prev = current
-	s.size--
+	value = current.next.value
 
+	if current.next.next != nil {
+		current.next.next.prev = current
+	}
+	current.next = current.next.next
+	s.size--
 	return value, nil
 }
 
