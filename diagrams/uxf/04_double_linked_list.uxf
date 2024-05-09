@@ -1,0 +1,30 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>240</x><y>11</y><w>110</w><h>60</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+Sizer&lt;T&gt;
+-
+-
++Size(): int64</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>400</x><y>11</y><w>110</w><h>60</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+Finder&lt;T&gt;
+-
+-
++Find(T): bool</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>310</x><y>141</y><w>140</w><h>130</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+DoubleLinkedLister&lt;T&gt;
+-
+-
++PopAt(int) (T, error)
++PushAt(int, T)
++First() (T, error)
++Last() (T, error)
++GetAt(int) (T, error)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>290</x><y>61</y><w>100</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;50;80;50;80;80</additional_attributes></element><element><id>Relation</id><coordinates><x>370</x><y>61</y><w>100</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>80;10;80;50;10;50;10;80</additional_attributes></element><element><id>UMLClass</id><coordinates><x>310</x><y>331</y><w>120</w><h>100</h></coordinates><panel_attributes>doubleLinkedList&lt;T&gt;
+-
+-size: int64
+-first: *node&lt;T&gt;
+-
+...</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>510</x><y>101</y><w>190</w><h>50</h></coordinates><panel_attributes>T debe poder ser comparable
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>510</x><y>171</y><w>190</w><h>70</h></coordinates><panel_attributes>Errores:
+- Lista vacia
+- Indice fuera del rango
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>370</x><y>261</y><w>30</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>UMLClass</id><coordinates><x>530</x><y>331</y><w>110</w><h>80</h></coordinates><panel_attributes>doubleNode&lt;T&gt;
+-
+-value: T
+-next: *node&lt;T&gt;
+-prev: *node&lt;T&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>420</x><y>361</y><w>130</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;110;10</additional_attributes></element><element><id>Relation</id><coordinates><x>440</x><y>181</y><w>90</w><h>30</h></coordinates><panel_attributes>lt=..</panel_attributes><additional_attributes>10;10;70;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>280</x><y>471</y><w>40</w><h>30</h></coordinates><panel_attributes>FIRST</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>360</x><y>471</y><w>40</w><h>30</h></coordinates><panel_attributes>...</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>440</x><y>471</y><w>40</w><h>30</h></coordinates><panel_attributes>...</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>520</x><y>471</y><w>70</w><h>30</h></coordinates><panel_attributes>/LAST/</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>310</x><y>471</y><w>70</w><h>30</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>50;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>390</x><y>471</y><w>70</w><h>30</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>50;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>470</x><y>471</y><w>70</w><h>30</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>50;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>580</x><y>471</y><w>70</w><h>30</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>50;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>630</x><y>471</y><w>40</w><h>30</h></coordinates><panel_attributes>NIL</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>310</x><y>481</y><w>70</w><h>30</h></coordinates><panel_attributes>lt=-&gt;</panel_attributes><additional_attributes>50;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>390</x><y>481</y><w>70</w><h>30</h></coordinates><panel_attributes>lt=-&gt;</panel_attributes><additional_attributes>50;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>470</x><y>481</y><w>70</w><h>30</h></coordinates><panel_attributes>lt=-&gt;</panel_attributes><additional_attributes>50;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>230</x><y>481</y><w>70</w><h>30</h></coordinates><panel_attributes>lt=-&gt;</panel_attributes><additional_attributes>50;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>200</x><y>471</y><w>40</w><h>30</h></coordinates><panel_attributes>NIL</panel_attributes><additional_attributes></additional_attributes></element></diagram>

@@ -21,3 +21,7 @@ A spanish playlist explaining all structures on this repository.
 ### Simple Linked List
 
 ![03_Simple_Linked_List](diagrams/img/03_simple_linked_list.png)
+
+### Double Linked List
+
+![04_Double_Linked_List](diagrams/img/04_double_linked_list.png)
