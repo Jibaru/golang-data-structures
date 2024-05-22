@@ -51,3 +51,14 @@ type DoubleLinkedLister[T comparable] interface {
 	Last() (T, error)
 	GetAt(index int) (T, error)
 }
+
+type BasicTree[T comparable] interface {
+	Sizer[T]
+	PushAt(in *TreeNode[T], val T) (*TreeNode[T], error)
+	DeleteWithDescendants(node *TreeNode[T]) error
+	DeleteWithoutDescendants(node *TreeNode[T]) error
+	Root() *TreeNode[T]
+	Leaves() []*TreeNode[T]
+	BreadFirstSearch(value T) bool
+	DepthFirstSearch(value T) bool
+}
