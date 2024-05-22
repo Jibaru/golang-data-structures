@@ -63,3 +63,13 @@ type BasicTree[T comparable] interface {
 	BreadFirstSearch(value T) bool
 	DepthFirstSearch(value T) bool
 }
+
+// HashMapper define the basic operations of a hash map
+type HashMapper[K comparable, V comparable] interface {
+	Finder[V]
+	Sizer[V]
+	PushAt(key K, value V)
+	PopAt(key K) (V, error)
+	Has(key K) bool
+	GetAt(key K) (V, error)
+}

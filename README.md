@@ -25,3 +25,7 @@ A spanish playlist explaining all structures on this repository.
 ### Double Linked List
 
 ![04_Double_Linked_List](diagrams/img/04_double_linked_list.png)
+
+### HashMap
+
+![05_HashMap](diagrams/img/05_hashmap.png)
