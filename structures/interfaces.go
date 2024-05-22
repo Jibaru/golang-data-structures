@@ -52,6 +52,7 @@ type DoubleLinkedLister[T comparable] interface {
 	GetAt(index int) (T, error)
 }
 
+// BasicTree define the basic operations of a tree
 type BasicTree[T comparable] interface {
 	Sizer[T]
 	PushAt(in *TreeNode[T], val T) (*TreeNode[T], error)

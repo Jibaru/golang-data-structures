@@ -7,19 +7,23 @@ var (
 	ErrIndexOutOfRangeInSimpleLinkedList = errors.New("index out of range")
 )
 
+// simpleLinkedList is a simple linked list that stores the first node and the size of the list
 type simpleLinkedList[T comparable] struct {
 	first *node[T]
 	size  int64
 }
 
+// NewSimpleLinkedList creates a new simple linked list
 func NewSimpleLinkedList[T comparable]() SimpleLinkedLister[T] {
 	return &simpleLinkedList[T]{}
 }
 
+// Size returns the size of the list
 func (s *simpleLinkedList[T]) Size() int64 {
 	return s.size
 }
 
+// Push adds a new node with value val to the end of the list
 func (s *simpleLinkedList[T]) Find(value T) bool {
 	for current := s.first; current != nil; current = current.next {
 		if current.value == value {
@@ -30,6 +34,7 @@ func (s *simpleLinkedList[T]) Find(value T) bool {
 	return false
 }
 
+// PushAt adds a new node with value at index
 func (s *simpleLinkedList[T]) PushAt(index int, value T) error {
 	if index < 0 || int(s.Size()) < index {
 		return ErrIndexOutOfRangeInSimpleLinkedList
@@ -52,6 +57,7 @@ func (s *simpleLinkedList[T]) PushAt(index int, value T) error {
 	return nil
 }
 
+// PopAt removes the node at index
 func (s *simpleLinkedList[T]) PopAt(index int) (T, error) {
 	if s.Size() == 0 {
 		var t T
@@ -82,6 +88,7 @@ func (s *simpleLinkedList[T]) PopAt(index int) (T, error) {
 	return value, nil
 }
 
+// First returns the value of the first node
 func (s *simpleLinkedList[T]) First() (T, error) {
 	if s.size == 0 {
 		var t T
@@ -91,6 +98,7 @@ func (s *simpleLinkedList[T]) First() (T, error) {
 	return s.first.value, nil
 }
 
+// Last returns the value of the last node
 func (s *simpleLinkedList[T]) Last() (T, error) {
 	if s.size == 0 {
 		var t T
@@ -105,6 +113,7 @@ func (s *simpleLinkedList[T]) Last() (T, error) {
 	return current.value, nil
 }
 
+// GetAt returns the value of the node at index
 func (s *simpleLinkedList[T]) GetAt(index int) (T, error) {
 	if s.Size() == 0 {
 		var t T
