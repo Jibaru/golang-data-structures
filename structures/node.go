@@ -11,3 +11,16 @@ type doubleNode[T comparable] struct {
 	prev  *doubleNode[T]
 	next  *doubleNode[T]
 }
+
+type TreeNode[T comparable] struct {
+	value    T
+	children []*TreeNode[T]
+}
+
+func (n *TreeNode[T]) Value() T {
+	return n.value
+}
+
+func (n *TreeNode[T]) Children() []*TreeNode[T] {
+	return n.children
+}
