@@ -52,6 +52,16 @@ type DoubleLinkedLister[T comparable] interface {
 	GetAt(index int) (T, error)
 }
 
+// HashMapper define the basic operations of a hash map
+type HashMapper[K comparable, V comparable] interface {
+	Finder[V]
+	Sizer[V]
+	PushAt(key K, value V)
+	PopAt(key K) (V, error)
+	Has(key K) bool
+	GetAt(key K) (V, error)
+}
+
 // BasicTree define the basic operations of a tree
 type BasicTree[T comparable] interface {
 	Sizer[T]
@@ -64,12 +74,9 @@ type BasicTree[T comparable] interface {
 	DepthFirstSearch(value T) bool
 }
 
-// HashMapper define the basic operations of a hash map
-type HashMapper[K comparable, V comparable] interface {
-	Finder[V]
-	Sizer[V]
-	PushAt(key K, value V)
-	PopAt(key K) (V, error)
-	Has(key K) bool
-	GetAt(key K) (V, error)
+type SearchBinaryTreer[T comparable] interface {
+	Finder[T]
+	Sizer[T]
+	Push(value T)
+	Delete(value T) error
 }
