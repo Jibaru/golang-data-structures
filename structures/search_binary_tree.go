@@ -10,7 +10,7 @@ var (
 
 // searchBinaryTree represents a binary search tree
 type searchBinaryTree[T comparable] struct {
-	root    *searchBinaryTreeNode[T]
+	root    *SearchBinaryTreeNode[T]
 	compare func(a, b T) int
 }
 
@@ -26,12 +26,12 @@ func (tree *searchBinaryTree[T]) Push(value T) {
 
 // pushSearchBinaryTreeNode inserts a new value into the binary search tree
 func pushSearchBinaryTreeNode[T comparable](
-	node *searchBinaryTreeNode[T],
+	node *SearchBinaryTreeNode[T],
 	value T,
 	compare func(a, b T) int,
-) *searchBinaryTreeNode[T] {
+) *SearchBinaryTreeNode[T] {
 	if node == nil {
-		return &searchBinaryTreeNode[T]{value: value}
+		return &SearchBinaryTreeNode[T]{value: value}
 	}
 
 	if compare(value, node.value) < 0 {
@@ -49,7 +49,7 @@ func (tree *searchBinaryTree[T]) Find(value T) bool {
 
 // findNode finds a value in the binary search tree
 func findNode[T comparable](
-	node *searchBinaryTreeNode[T],
+	node *SearchBinaryTreeNode[T],
 	value T,
 	compare func(a, b T) int,
 ) bool {
@@ -74,10 +74,10 @@ func (tree *searchBinaryTree[T]) Delete(value T) error {
 
 // deleteSearchBinaryTreeNode deletes a value from the binary search tree
 func deleteSearchBinaryTreeNode[T comparable](
-	node *searchBinaryTreeNode[T],
+	node *SearchBinaryTreeNode[T],
 	value T,
 	compare func(a, b T) int,
-) (*searchBinaryTreeNode[T], error) {
+) (*SearchBinaryTreeNode[T], error) {
 	if node == nil {
 		return nil, ErrorSearchBinaryTreeValueNotFound
 	}
@@ -95,15 +95,15 @@ func deleteSearchBinaryTreeNode[T comparable](
 		}
 
 		// Node with two children: Get the inorder successor (smallest in the right subtree)
-		minValueNode := findMinNode(node.right)
+		minValueNode := findMinSearchBinaryTreeNode(node.right)
 		node.value = minValueNode.value
 		node.right, _ = deleteSearchBinaryTreeNode(node.right, minValueNode.value, compare)
 	}
 	return node, nil
 }
 
-// findMinNode finds the node with the minimum value in the binary search tree
-func findMinNode[T comparable](node *searchBinaryTreeNode[T]) *searchBinaryTreeNode[T] {
+// findMinSearchBinaryTreeNode finds the node with the minimum value in the binary search tree
+func findMinSearchBinaryTreeNode[T comparable](node *SearchBinaryTreeNode[T]) *SearchBinaryTreeNode[T] {
 	current := node
 	for current != nil && current.left != nil {
 		current = current.left
@@ -117,9 +117,13 @@ func (tree *searchBinaryTree[T]) Size() int64 {
 }
 
 // size returns the size of the binary search tree
-func size[T comparable](node *searchBinaryTreeNode[T]) int64 {
+func size[T comparable](node *SearchBinaryTreeNode[T]) int64 {
 	if node == nil {
 		return 0
 	}
 	return 1 + size(node.left) + size(node.right)
+}
+
+func (tree *searchBinaryTree[T]) Root() *SearchBinaryTreeNode[T] {
+	return tree.root
 }

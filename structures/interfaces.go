@@ -79,4 +79,12 @@ type SearchBinaryTreer[T comparable] interface {
 	Sizer[T]
 	Push(value T)
 	Delete(value T) error
+	Root() *SearchBinaryTreeNode[T]
+}
+
+type PriorityQueuer[T comparable] interface {
+	Sizer[T]
+	Push(value T)
+	Pop() (T, error)
+	Top() (T, error)
 }

@@ -29,9 +29,9 @@ func (n *TreeNode[T]) Children() []*TreeNode[T] {
 	return n.children
 }
 
-// searchBinaryTreeNode represents a node in the search binary tree
-type searchBinaryTreeNode[T any] struct {
+// SearchBinaryTreeNode represents a node in the search binary tree
+type SearchBinaryTreeNode[T any] struct {
 	value T
-	left  *searchBinaryTreeNode[T]
-	right *searchBinaryTreeNode[T]
+	left  *SearchBinaryTreeNode[T]
+	right *SearchBinaryTreeNode[T]
 }
