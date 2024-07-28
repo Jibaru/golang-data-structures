@@ -29,3 +29,7 @@ A spanish playlist explaining all structures on this repository.
 ### HashMap
 
 ![05_HashMap](diagrams/img/05_hashmap.png)
+
+### Tree
+
+![06_Tree](diagrams/img/06_tree.png)
