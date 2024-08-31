@@ -1,0 +1,27 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>12</x><y>60</y><w>120</w><h>60</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+Sizer&lt;T&gt;
+-
+-
++Size(): int64</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>82</x><y>160</y><w>150</w><h>100</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+SearchBinaryTreer&lt;T&gt;
+-
+-
++Push(value T)
++Pop() (T, error)
++Top() (T, error)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>62</x><y>110</y><w>110</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;30;90;30;90;50</additional_attributes></element><element><id>UMLClass</id><coordinates><x>52</x><y>330</y><w>210</w><h>90</h></coordinates><panel_attributes>SearchBinaryTree&lt;T&gt;
+-
++root: *SearchBinaryTreeNode&lt;T&gt;
++compare: func(a, b T) int	
+-
+...</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>312</x><y>130</y><w>190</w><h>50</h></coordinates><panel_attributes>T debe poder ser comparable
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>312</x><y>190</y><w>200</w><h>40</h></coordinates><panel_attributes>Errores:
+- Valor no encontrado
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>142</x><y>250</y><w>30</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>UMLClass</id><coordinates><x>322</x><y>330</y><w>210</w><h>80</h></coordinates><panel_attributes>SearchBinaryTreeNode&lt;T&gt;
+-
+-value: T
+-left: *SearchBinaryTreeNode&lt;T&gt;
+-right: *SearchBinaryTreeNode&lt;T&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>252</x><y>360</y><w>90</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;70;10</additional_attributes></element><element><id>Relation</id><coordinates><x>222</x><y>200</y><w>110</w><h>30</h></coordinates><panel_attributes>lt=..</panel_attributes><additional_attributes>10;10;90;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>172</x><y>60</y><w>120</w><h>60</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+Finder&lt;T&gt;
+-
+-
++Find(T): bool</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>142</x><y>110</y><w>110</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>90;10;90;30;10;30;10;50</additional_attributes></element></diagram>
