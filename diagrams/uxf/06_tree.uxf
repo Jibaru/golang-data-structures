@@ -3,7 +3,7 @@ Sizer&lt;T&gt;
 -
 -
 +Size(): int64</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>160</x><y>161</y><w>330</w><h>130</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
-DoubleLinkedLister&lt;T&gt;
+BasicTree&lt;T&gt;
 -
 -
 +PushAt(in *TreeNode&lt;T&gt;, val T) (*TreeNode&lt;T&gt;, error)
