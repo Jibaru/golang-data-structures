@@ -47,12 +47,12 @@ func TestPriorityQueue_Pop_Lowest(t *testing.T) {
 		}
 		return 0
 	})
-	nums := []int{5, 3, 7, 1, 4, 6, 8}
+	nums := []int{5, 3, 7, 3, 1, 4, 6, 8}
 	for _, num := range nums {
 		pq.Push(num)
 	}
 
-	sortedNums := []int{1, 3, 4, 5, 6, 7, 8}
+	sortedNums := []int{1, 3, 3, 4, 5, 6, 7, 8}
 
 	for _, num := range sortedNums {
 		top, err := pq.Pop()
@@ -75,12 +75,12 @@ func TestPriorityQueue_Pop_Highest(t *testing.T) {
 		}
 		return 0
 	})
-	nums := []int{5, 3, 7, 1, 4, 6, 8}
+	nums := []int{5, 3, 7, 1, 1, 4, 6, 8}
 	for _, num := range nums {
 		pq.Push(num)
 	}
 
-	sortedNums := []int{8, 7, 6, 5, 4, 3, 1}
+	sortedNums := []int{8, 7, 6, 5, 4, 3, 1, 1}
 
 	for _, num := range sortedNums {
 		top, err := pq.Pop()
@@ -166,7 +166,7 @@ func TestPriorityQueue_Size(t *testing.T) {
 		}
 		return 0
 	})
-	nums := []int{5, 3, 7, 1, 4, 6, 8}
+	nums := []int{5, 3, 7, 1, 1, 4, 6, 7, 8}
 	for i, num := range nums {
 		if pq.Size() != int64(i) {
 			t.Fatalf("expected size to be %d but got %d", i, pq.Size())
