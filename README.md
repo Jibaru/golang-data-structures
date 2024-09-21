@@ -33,3 +33,11 @@ A spanish playlist explaining all structures on this repository.
 ### Tree
 
 ![06_Tree](diagrams/img/06_tree.png)
+
+### Search Binary Tree
+
+![07_Search_Binary_Tree](diagrams/img/07_search_binary_tree.png)
+
+### Priority Queue
+
+![08_Priority_Queue](diagrams/img/08_priority_queue.png)
