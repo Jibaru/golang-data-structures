@@ -35,3 +35,10 @@ type SearchBinaryTreeNode[T any] struct {
 	left  *SearchBinaryTreeNode[T]
 	right *SearchBinaryTreeNode[T]
 }
+
+// Edge represents an edge in a graph with a source, destination, and weight.
+type Edge[T comparable, W any] struct {
+	From   T
+	To     T
+	Weight W
+}

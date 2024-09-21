@@ -88,3 +88,21 @@ type PriorityQueuer[T comparable] interface {
 	Pop() (T, error)
 	Top() (T, error)
 }
+
+// Graph represents a generic weighted graph with advanced operations
+type Graph[T comparable, W any] interface {
+	AddVertex(vertex T) error
+	RemoveVertex(vertex T) error
+	AddEdge(from, to T, weight W) error
+	RemoveEdge(from, to T) error
+	HasEdge(from, to T) bool
+	Neighbors(vertex T) (map[T]W, error)
+	GetWeight(from, to T) (W, error)
+	GetVertices() []T
+	GetEdges() []Edge[T, W]
+	Degree(vertex T) (int, error)
+	InDegree(vertex T) (int, error)
+	Transpose() Graph[T, W]
+	IsDirected() bool
+	ShortestPath(from, to T) ([]T, error)
+}
