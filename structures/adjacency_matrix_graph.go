@@ -1,9 +1,11 @@
 package structures
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // adjacencyMatrixGraph represents a weighted graph implemented using an adjacency matrix.
-type adjacencyMatrixGraph[T comparable, W any] struct {
+type adjacencyMatrixGraph[T comparable, W Numeric] struct {
 	vertices []T
 	matrix   [][]*W
 	index    map[T]int
@@ -11,7 +13,7 @@ type adjacencyMatrixGraph[T comparable, W any] struct {
 }
 
 // NewAdjacencyMatrixGraph creates a new weighted adjacency matrix graph.
-func NewAdjacencyMatrixGraph[T comparable, W any](directed bool) Graph[T, W] {
+func NewAdjacencyMatrixGraph[T comparable, W Numeric](directed bool) Graph[T, W] {
 	return &adjacencyMatrixGraph[T, W]{
 		vertices: []T{},
 		matrix:   [][]*W{},
@@ -186,7 +188,77 @@ func (g *adjacencyMatrixGraph[T, W]) IsDirected() bool {
 
 // ShortestPath implements Dijkstra's algorithm to find the shortest path.
 func (g *adjacencyMatrixGraph[T, W]) ShortestPath(from, to T) ([]T, error) {
-	// Dijkstra's algorithm (simplified)
-	// Requires weights to be comparable, assume W is numeric
-	return nil, fmt.Errorf("not implemented")
+	_, fromExists := g.index[from]
+	_, toExists := g.index[to]
+	if !fromExists || !toExists {
+		return nil, ErrVertexNotFound
+	}
+
+	// Initialize distances, previous vertices, and the priority queue.
+	distances := make(map[T]W)
+	previous := make(map[T]*T)
+	pq := NewPriorityQueue[T](func(a, b T) int {
+		// Compare distances of a and b for priority queue ordering.
+		if distances[a] < distances[b] {
+			return -1
+		}
+		if distances[a] > distances[b] {
+			return 1
+		}
+		return 0
+	})
+
+	infinity := NumericMaxValue[W]()
+	zero := NumericZeroValue[W]()
+
+	// Set initial distances to infinity.
+	for _, vertex := range g.vertices {
+		distances[vertex] = infinity
+	}
+	distances[from] = zero
+
+	// Start with the source vertex in the priority queue.
+	pq.Push(from)
+
+	// Dijkstra's algorithm main loop.
+	for pq.Size() > 0 {
+		current, _ := pq.Pop()
+		currentIdx := g.index[current]
+
+		// Early exit if we reached the target vertex.
+		if current == to {
+			break
+		}
+
+		// Iterate over neighbors of the current vertex.
+		for neighborIdx, weightPtr := range g.matrix[currentIdx] {
+			if weightPtr == nil {
+				continue // Skip if there is no edge.
+			}
+
+			neighbor := g.vertices[neighborIdx]
+			weight := *weightPtr
+			newDist := distances[current] + weight
+
+			// Update the distance if a shorter path is found.
+			if newDist < distances[neighbor] {
+				distances[neighbor] = newDist
+				previous[neighbor] = &current
+				pq.Push(neighbor)
+			}
+		}
+	}
+
+	// If the destination vertex distance is still infinity, no path exists.
+	if distances[to] == infinity {
+		return nil, fmt.Errorf("no path from %v to %v", from, to)
+	}
+
+	// Reconstruct the path from `to` to `from` using the `previous` map.
+	var path []T
+	for at := &to; at != nil; at = previous[*at] {
+		path = append([]T{*at}, path...)
+	}
+
+	return path, nil
 }

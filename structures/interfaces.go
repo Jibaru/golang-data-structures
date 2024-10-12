@@ -1,5 +1,7 @@
 package structures
 
+import "golang.org/x/exp/constraints"
+
 // Sizer define the size of the structure
 type Sizer[T comparable] interface {
 	Size() int64
@@ -89,8 +91,12 @@ type PriorityQueuer[T comparable] interface {
 	Top() (T, error)
 }
 
+type Numeric interface {
+	constraints.Integer | constraints.Float
+}
+
 // Graph represents a generic weighted graph with advanced operations
-type Graph[T comparable, W any] interface {
+type Graph[T comparable, W Numeric] interface {
 	AddVertex(vertex T) error
 	RemoveVertex(vertex T) error
 	AddEdge(from, to T, weight W) error

@@ -1,15 +1,17 @@
 package structures
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // adjacencyListGraph represents a weighted graph implemented using an adjacency list.
-type adjacencyListGraph[T comparable, W any] struct {
+type adjacencyListGraph[T comparable, W Numeric] struct {
 	adjList  map[T]map[T]W
 	directed bool
 }
 
 // NewAdjacencyListGraph creates a new weighted adjacency list graph.
-func NewAdjacencyListGraph[T comparable, W any](directed bool) Graph[T, W] {
+func NewAdjacencyListGraph[T comparable, W Numeric](directed bool) Graph[T, W] {
 	return &adjacencyListGraph[T, W]{
 		adjList:  make(map[T]map[T]W),
 		directed: directed,
@@ -151,7 +153,62 @@ func (g *adjacencyListGraph[T, W]) IsDirected() bool {
 
 // ShortestPath implements Dijkstra's algorithm to find the shortest path.
 func (g *adjacencyListGraph[T, W]) ShortestPath(from, to T) ([]T, error) {
-	// Dijkstra's algorithm (simplified)
-	// Requires weights to be comparable, assume W is numeric
-	return nil, fmt.Errorf("not implemented")
+	// Check if the start and end vertices exist.
+	if _, exists := g.adjList[from]; !exists {
+		return nil, ErrVertexNotFound
+	}
+	if _, exists := g.adjList[to]; !exists {
+		return nil, ErrVertexNotFound
+	}
+
+	// Initialize the distance map, previous vertex map, and priority queue.
+	distances := make(map[T]W)
+	previous := make(map[T]*T)
+
+	// Create a comparison function for the priority queue.
+	compare := func(a, b T) int {
+		if distances[a] < distances[b] {
+			return -1
+		} else if distances[a] > distances[b] {
+			return 1
+		}
+		return 0
+	}
+
+	pq := NewPriorityQueue(compare)
+
+	// Initialize all distances to infinity.
+	infinity := NumericMaxValue[W]()
+	for vertex := range g.adjList {
+		distances[vertex] = infinity
+	}
+	distances[from] = NumericZeroValue[W]() // Distance to itself is zero.
+
+	// Add the starting vertex to the priority queue.
+	pq.Push(from)
+
+	// Dijkstra's algorithm loop.
+	for pq.Size() > 0 {
+		current, err := pq.Pop()
+		if err != nil {
+			return nil, fmt.Errorf("error popping from priority queue: %w", err)
+		}
+
+		// If we reached the target vertex, reconstruct the path.
+		if current == to {
+			return reconstructPathOfGraph(previous, to), nil
+		}
+
+		// Explore all neighbors of the current vertex.
+		for neighbor, weight := range g.adjList[current] {
+			alt := distances[current] + weight
+			if alt < distances[neighbor] {
+				distances[neighbor] = alt
+				previous[neighbor] = &current
+				pq.Push(neighbor)
+			}
+		}
+	}
+
+	return nil, fmt.Errorf("no path from %v to %v", from, to)
 }
