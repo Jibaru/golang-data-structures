@@ -21,7 +21,7 @@ func NewAdjacencyListGraph[T comparable, W Numeric](directed bool) Graph[T, W] {
 // AddVertex adds a vertex to the graph.
 func (g *adjacencyListGraph[T, W]) AddVertex(vertex T) error {
 	if _, exists := g.adjList[vertex]; exists {
-		return fmt.Errorf("vertex %v already exists", vertex)
+		return fmt.Errorf("%w: %v", ErrVertexAlreadyExists, vertex)
 	}
 	g.adjList[vertex] = make(map[T]W)
 	return nil
@@ -191,7 +191,7 @@ func (g *adjacencyListGraph[T, W]) ShortestPath(from, to T) ([]T, error) {
 	for pq.Size() > 0 {
 		current, err := pq.Pop()
 		if err != nil {
-			return nil, fmt.Errorf("error popping from priority queue: %w", err)
+			return nil, fmt.Errorf("%w: error popping from priority queue: %w", ErrFindingShortestPath, err)
 		}
 
 		// If we reached the target vertex, reconstruct the path.
@@ -210,5 +210,5 @@ func (g *adjacencyListGraph[T, W]) ShortestPath(from, to T) ([]T, error) {
 		}
 	}
 
-	return nil, fmt.Errorf("no path from %v to %v", from, to)
+	return nil, fmt.Errorf("%w: no path from %v to %v", ErrFindingShortestPath, from, to)
 }

@@ -10,6 +10,7 @@ var (
 	ErrVertexNotFound      = errors.New("vertex not found")
 	ErrEdgeNotFound        = errors.New("edge not found")
 	ErrVertexAlreadyExists = errors.New("vertex already exists")
+	ErrFindingShortestPath = errors.New("can not find shortest path")
 )
 
 // NumericMaxValue returns the maximum possible value for a given numeric type W.

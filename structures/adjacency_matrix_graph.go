@@ -251,7 +251,7 @@ func (g *adjacencyMatrixGraph[T, W]) ShortestPath(from, to T) ([]T, error) {
 
 	// If the destination vertex distance is still infinity, no path exists.
 	if distances[to] == infinity {
-		return nil, fmt.Errorf("no path from %v to %v", from, to)
+		return nil, fmt.Errorf("%w: no path from %v to %v", ErrFindingShortestPath, from, to)
 	}
 
 	// Reconstruct the path from `to` to `from` using the `previous` map.
