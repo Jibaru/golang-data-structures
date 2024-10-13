@@ -7,8 +7,9 @@ import (
 )
 
 var (
-	ErrVertexNotFound = errors.New("vertex not found")
-	ErrEdgeNotFound   = errors.New("edge not found")
+	ErrVertexNotFound      = errors.New("vertex not found")
+	ErrEdgeNotFound        = errors.New("edge not found")
+	ErrVertexAlreadyExists = errors.New("vertex already exists")
 )
 
 // NumericMaxValue returns the maximum possible value for a given numeric type W.

@@ -25,7 +25,7 @@ func NewAdjacencyMatrixGraph[T comparable, W Numeric](directed bool) Graph[T, W]
 // AddVertex adds a vertex to the graph.
 func (g *adjacencyMatrixGraph[T, W]) AddVertex(vertex T) error {
 	if _, exists := g.index[vertex]; exists {
-		return fmt.Errorf("vertex %v already exists", vertex)
+		return fmt.Errorf("%w: %v", ErrVertexAlreadyExists, vertex)
 	}
 	g.index[vertex] = len(g.vertices)
 	g.vertices = append(g.vertices, vertex)
