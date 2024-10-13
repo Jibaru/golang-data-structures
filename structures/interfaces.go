@@ -103,9 +103,9 @@ type Graph[T comparable, W Numeric] interface {
 	RemoveEdge(from, to T) error
 	HasEdge(from, to T) bool
 	Neighbors(vertex T) (map[T]W, error)
-	GetWeight(from, to T) (W, error)
-	GetVertices() []T
-	GetEdges() []Edge[T, W]
+	Weight(from, to T) (W, error)
+	Vertices() []T
+	Edges() []Edge[T, W]
 	Degree(vertex T) (int, error)
 	InDegree(vertex T) (int, error)
 	Transpose() Graph[T, W]

@@ -78,8 +78,8 @@ func (g *adjacencyListGraph[T, W]) Neighbors(vertex T) (map[T]W, error) {
 	return neighbors, nil
 }
 
-// GetWeight returns the weight of the edge between two vertices.
-func (g *adjacencyListGraph[T, W]) GetWeight(from, to T) (W, error) {
+// Weight returns the weight of the edge between two vertices.
+func (g *adjacencyListGraph[T, W]) Weight(from, to T) (W, error) {
 	if _, exists := g.adjList[from]; !exists {
 		return *new(W), ErrVertexNotFound
 	}
@@ -90,8 +90,8 @@ func (g *adjacencyListGraph[T, W]) GetWeight(from, to T) (W, error) {
 	return weight, nil
 }
 
-// GetVertices returns all vertices in the graph.
-func (g *adjacencyListGraph[T, W]) GetVertices() []T {
+// Vertices returns all vertices in the graph.
+func (g *adjacencyListGraph[T, W]) Vertices() []T {
 	vertices := make([]T, 0, len(g.adjList))
 	for vertex := range g.adjList {
 		vertices = append(vertices, vertex)
@@ -99,8 +99,8 @@ func (g *adjacencyListGraph[T, W]) GetVertices() []T {
 	return vertices
 }
 
-// GetEdges returns all edges in the graph with their weights.
-func (g *adjacencyListGraph[T, W]) GetEdges() []Edge[T, W] {
+// Edges returns all edges in the graph with their weights.
+func (g *adjacencyListGraph[T, W]) Edges() []Edge[T, W] {
 	var edges []Edge[T, W]
 	for from, neighbors := range g.adjList {
 		for to, weight := range neighbors {

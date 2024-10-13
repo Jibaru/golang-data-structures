@@ -53,8 +53,8 @@ func TestAdjacencyListGraph_RemoveVertex(t *testing.T) {
 	if err != nil {
 		t.Errorf("expected no error, got %v", err)
 	}
-	if len(g.GetVertices()) != 1 {
-		t.Errorf("expected 1 vertex, got %d", len(g.GetVertices()))
+	if len(g.Vertices()) != 1 {
+		t.Errorf("expected 1 vertex, got %d", len(g.Vertices()))
 	}
 
 	// Test removal of non-existing vertex.
@@ -119,13 +119,13 @@ func TestAdjacencyListGraph_Neighbors(t *testing.T) {
 	}
 }
 
-func TestAdjacencyListGraph_GetWeight(t *testing.T) {
+func TestAdjacencyListGraph_Weight(t *testing.T) {
 	g := structures.NewAdjacencyListGraph[string, int](true)
 	g.AddVertex("A")
 	g.AddVertex("B")
 	g.AddEdge("A", "B", 10)
 
-	weight, err := g.GetWeight("A", "B")
+	weight, err := g.Weight("A", "B")
 	if err != nil {
 		t.Errorf("expected no error, got %v", err)
 	}
@@ -133,30 +133,30 @@ func TestAdjacencyListGraph_GetWeight(t *testing.T) {
 		t.Errorf("expected weight 10, got %d", weight)
 	}
 
-	_, err = g.GetWeight("A", "C")
+	_, err = g.Weight("A", "C")
 	if err == nil {
 		t.Errorf("expected error for non-existing edge")
 	}
 }
 
-func TestAdjacencyListGraph_GetVertices(t *testing.T) {
+func TestAdjacencyListGraph_Vertices(t *testing.T) {
 	g := structures.NewAdjacencyListGraph[string, int](true)
 	g.AddVertex("A")
 	g.AddVertex("B")
 
-	vertices := g.GetVertices()
+	vertices := g.Vertices()
 	if len(vertices) != 2 {
 		t.Errorf("expected 2 vertices, got %d", len(vertices))
 	}
 }
 
-func TestAdjacencyListGraph_GetEdges(t *testing.T) {
+func TestAdjacencyListGraph_Edges(t *testing.T) {
 	g := structures.NewAdjacencyListGraph[string, int](true)
 	g.AddVertex("A")
 	g.AddVertex("B")
 	g.AddEdge("A", "B", 10)
 
-	edges := g.GetEdges()
+	edges := g.Edges()
 	if len(edges) != 1 || edges[0].From != "A" || edges[0].To != "B" || edges[0].Weight != 10 {
 		t.Errorf("expected edge A -> B with weight 10, got %v", edges)
 	}

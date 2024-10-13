@@ -26,7 +26,7 @@ func TestAdjacencyMatrixGraph_AddVertex(t *testing.T) {
 		t.Fatalf("expected structures.ErrVertexNotFound, got %v", err)
 	}
 
-	vertices := graph.GetVertices()
+	vertices := graph.Vertices()
 	if len(vertices) != 1 || vertices[0] != "A" {
 		t.Fatalf("expected vertex A to be added, got %v", vertices)
 	}
@@ -47,7 +47,7 @@ func TestAdjacencyMatrixGraph_RemoveVertex(t *testing.T) {
 		t.Fatalf("expected structures.ErrVertexNotFound, got %v", err)
 	}
 
-	vertices := graph.GetVertices()
+	vertices := graph.Vertices()
 	if len(vertices) != 1 || vertices[0] != "B" {
 		t.Fatalf("expected vertex B to remain, got %v", vertices)
 	}
@@ -63,7 +63,7 @@ func TestAdjacencyMatrixGraph_AddEdge(t *testing.T) {
 		t.Fatalf("expected no error, got %v", err)
 	}
 
-	weight, err := graph.GetWeight("A", "B")
+	weight, err := graph.Weight("A", "B")
 	if err != nil || weight != 5 {
 		t.Fatalf("expected weight 5, got %v (error: %v)", weight, err)
 	}
@@ -80,7 +80,7 @@ func TestAdjacencyMatrixGraph_RemoveEdge(t *testing.T) {
 		t.Fatalf("expected no error, got %v", err)
 	}
 
-	_, err = graph.GetWeight("A", "B")
+	_, err = graph.Weight("A", "B")
 	if !errors.Is(err, structures.ErrEdgeNotFound) {
 		t.Fatalf("expected structures.ErrEdgeNotFound, got %v", err)
 	}
@@ -116,6 +116,49 @@ func TestAdjacencyMatrixGraph_Neighbors(t *testing.T) {
 
 	if len(neighbors) != 2 || neighbors["B"] != 5 || neighbors["C"] != 10 {
 		t.Fatalf("expected neighbors B(5) and C(10), got %v", neighbors)
+	}
+}
+
+func TestAdjacencyMatrixGraph_Weight(t *testing.T) {
+	g := structures.NewAdjacencyMatrixGraph[string, int](true)
+	g.AddVertex("A")
+	g.AddVertex("B")
+	g.AddEdge("A", "B", 10)
+
+	weight, err := g.Weight("A", "B")
+	if err != nil {
+		t.Errorf("expected no error, got %v", err)
+	}
+	if weight != 10 {
+		t.Errorf("expected weight 10, got %d", weight)
+	}
+
+	_, err = g.Weight("A", "C")
+	if err == nil {
+		t.Errorf("expected error for non-existing edge")
+	}
+}
+
+func TestAdjacencyMatrixGraph_Vertices(t *testing.T) {
+	g := structures.NewAdjacencyMatrixGraph[string, int](true)
+	g.AddVertex("A")
+	g.AddVertex("B")
+
+	vertices := g.Vertices()
+	if len(vertices) != 2 {
+		t.Errorf("expected 2 vertices, got %d", len(vertices))
+	}
+}
+
+func TestAdjacencyMatrixGraph_Edges(t *testing.T) {
+	g := structures.NewAdjacencyMatrixGraph[string, int](true)
+	g.AddVertex("A")
+	g.AddVertex("B")
+	g.AddEdge("A", "B", 10)
+
+	edges := g.Edges()
+	if len(edges) != 1 || edges[0].From != "A" || edges[0].To != "B" || edges[0].Weight != 10 {
+		t.Errorf("expected edge A -> B with weight 10, got %v", edges)
 	}
 }
 

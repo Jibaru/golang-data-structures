@@ -103,8 +103,8 @@ func (g *adjacencyMatrixGraph[T, W]) Neighbors(vertex T) (map[T]W, error) {
 	return neighbors, nil
 }
 
-// GetWeight returns the weight of the edge between two vertices.
-func (g *adjacencyMatrixGraph[T, W]) GetWeight(from, to T) (W, error) {
+// Weight returns the weight of the edge between two vertices.
+func (g *adjacencyMatrixGraph[T, W]) Weight(from, to T) (W, error) {
 	fromIdx, fromExists := g.index[from]
 	toIdx, toExists := g.index[to]
 	if !fromExists || !toExists {
@@ -117,13 +117,13 @@ func (g *adjacencyMatrixGraph[T, W]) GetWeight(from, to T) (W, error) {
 	return *weight, nil
 }
 
-// GetVertices returns all vertices in the graph.
-func (g *adjacencyMatrixGraph[T, W]) GetVertices() []T {
+// Vertices returns all vertices in the graph.
+func (g *adjacencyMatrixGraph[T, W]) Vertices() []T {
 	return g.vertices
 }
 
-// GetEdges returns all edges in the graph with their weights.
-func (g *adjacencyMatrixGraph[T, W]) GetEdges() []Edge[T, W] {
+// Edges returns all edges in the graph with their weights.
+func (g *adjacencyMatrixGraph[T, W]) Edges() []Edge[T, W] {
 	var edges []Edge[T, W]
 	for i, from := range g.vertices {
 		for j, to := range g.vertices {
