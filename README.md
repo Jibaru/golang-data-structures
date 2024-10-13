@@ -41,3 +41,7 @@ A spanish playlist explaining all structures on this repository.
 ### Priority Queue
 
 ![08_Priority_Queue](diagrams/img/08_priority_queue.png)
+
+### Graph
+
+![09_Graph](diagrams/img/09_graph.png)
